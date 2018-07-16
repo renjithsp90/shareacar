@@ -25,6 +25,25 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
           <![endif]-->
+          <script>
+            // This example requires the Places library. Include the libraries=places
+            // parameter when you first load the API. For example:
+            // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+      
+            function initMap() {
+              var from = new google.maps.Map(document.getElementById('from'), {
+                });
+              var input_from = document.getElementById('home_from');
+                var autocomplete = new google.maps.places.Autocomplete(input_from);
+                
+            var to = new google.maps.Map(document.getElementById('to'), {
+                });
+              var input_to = document.getElementById('home_to');
+                var autocomplete = new google.maps.places.Autocomplete(input_to);
+            }
+          </script>
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXMgf6RbjKK6VN8rUMm0jLslAMYHiN-Pg&libraries=places&callback=initMap"
+              async defer></script>
 </head>
 
     <body>
@@ -70,29 +89,26 @@
                     <div class="container ie-h-align-center-fix">
                         <div class="row">
                             <div class="col-xs-12 ml-auto mr-auto ie-container-width-fix">
-                                <form action="index.html" method="get" class="tm-search-form tm-section-pad-2">
+                                <form action="search.php" method="post" class="tm-search-form tm-section-pad-2">
                                     <div class="form-row tm-search-form-row">
-                                        <div class="form-group tm-form-element tm-form-element-100">
+                                        <div class="form-group tm-form-element tm-form-element-100" id="pac_card">
                                             <i class="fa fa-map-marker fa-2x tm-form-element-icon"></i>
-                                            <input name="home_from" type="text" class="form-control" id="pac-input" placeholder="Leaving from...">
+                                            <input id="home_from" name="home_from" type="text" class="form-control" placeholder="Leaving from...">
                                         </div>
-
-                                        <div class="form-group tm-form-element tm-form-element-100">
+                                        <div id="from"></div>
+                                        <div class="form-group tm-form-element tm-form-element-100" id="pac-card">
                                             <i class="fa fa-map-marker fa-2x tm-form-element-icon"></i>
-                                            <input name="home_to" type="text" class="form-control" id="home_to" placeholder="Going to...">
+                                            <input id="home_to" name="home_to" type="text" class="form-control" placeholder="Going to...">
                                         </div>
-
+                                        <div id="to"></div>
                                         <div class="form-group tm-form-element tm-form-element-50">
                                             <i class="fa fa-calendar fa-2x tm-form-element-icon"></i>
-                                            <input name="home_date" type="text" class="form-control" id="home_date" placeholder="Date of travel">
+                                            <input name="check-in" type="text" class="form-control" id="home_date" placeholder="Date of Travel">
                                         </div>
                                         <div class="form-group tm-form-element tm-form-element-2">
                                             <button type="submit" class="btn btn-primary tm-btn-search">Search</button>
                                         </div>
                                     </div>
-                                      <div class="form-row clearfix pl-2 pr-2 tm-fx-col-xs">                                          
-                                          <a href="#" class="ie-10-ml-auto ml-auto mt-1 tm-font-semibold tm-color-primary">Need Help?</a>
-                                      </div>
                                 </form>
                             </div>                        
                         </div>      
@@ -399,7 +415,7 @@
 
                 
                 // Date Picker
-                const pickerCheckIn = datepicker('#inputCheckIn');
+                const pickerCheckIn = datepicker('#home_date');
                 const pickerCheckOut = datepicker('#inputCheckOut');
                 
                 // Slick carousel
